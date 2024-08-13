@@ -35,9 +35,9 @@
 	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/sinunionproyect" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/proyecto" />
         <property name="user" value="root" />
-        <property name="password" value="root" /> 
+        <property name="password" value="operacion10" /> 
 
         <!-- Propiedades connection pool para C3P0 -->
         <property name="minPoolSize" value="5" />

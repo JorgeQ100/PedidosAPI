@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.distribuida.DAO.DetallePedidosDAO;
@@ -34,4 +35,40 @@ public class DetallePedidosController {
 		if(opcion == 1) return "detallepedidos-add";
 		else return "detallepedidos-del";
 	}
+	
+	
+	@PostMapping("/add")
+	public String add(@RequestParam("idDetalleDedidos")@Nullable Integer idDetalleDedidos
+			         ,@RequestParam("IdPedido")@Nullable Integer IdPedido
+			         ,@RequestParam("IdProducto")@Nullable Integer IdProducto
+			         ,@RequestParam("Cantidad")@Nullable Integer Cantidad
+			         ,@RequestParam("PrecioUnitario")@Nullable Double PrecioUnitario) {
+		if(idDetalleDedidos == null) {
+			DetallePedidos detallePedidos = new DetallePedidos(0, IdPedido, IdProducto, Cantidad, PrecioUnitario);
+			detallePedidosDAO.add(detallePedidos);
+		}else {
+			DetallePedidos detallePedidos = new DetallePedidos(idDetalleDedidos, IdPedido, IdProducto, Cantidad, PrecioUnitario);
+			detallePedidosDAO.UP(detallePedidos);
+		}
+		return "redirect:/detallepedidos/findAll";
+	}
+	
+	@GetMapping("/del")
+	public String del(@RequestParam("idDetalleDedidos")@Nullable Integer idDetalleDedidos) {
+		detallePedidosDAO.del(idDetalleDedidos);
+		return "redirect:/detallepedidos/findAll";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
